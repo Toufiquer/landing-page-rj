@@ -1,20 +1,20 @@
 'use client'
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 interface ContentData {
-  title: string;
-  subtitle: string;
-  price: string;
-  buttonText: string;
-  timerText: string;
-  offerText: string;
-  reviewTitle: string;
-  reviewText: string;
-  productDetails: string;
-  ctaText: string;
+  title: string
+  subtitle: string
+  price: string
+  buttonText: string
+  timerText: string
+  offerText: string
+  reviewTitle: string
+  reviewText: string
+  productDetails: string
+  ctaText: string
 }
 
 const Dashboard: React.FC = () => {
@@ -26,70 +26,82 @@ const Dashboard: React.FC = () => {
     timerText: '23 59 59',
     offerText: 'অফার শেষ হওয়ার আগে এখনই এক্সেস নিন!',
     reviewTitle: 'একঝলকে পাঠকের রিভিউ!',
-    reviewText: 'ভাইজান! ই-বুক টা কিনলাই দেখেন এড এর খরচ আসলেই কমবে! অডিয়েন্স টারগেটিং ছাড়াও আরো নানান ধরণের টিপস আছে সব দিয়া দিছি।',
+    reviewText:
+      'ভাইজান! ই-বুক টা কিনলাই দেখেন এড এর খরচ আসলেই কমবে! অডিয়েন্স টারগেটিং ছাড়াও আরো নানান ধরণের টিপস আছে সব দিয়া দিছি।',
     productDetails: 'উদ্যোক্তা ও মার্কেটারদের বাস্তব সমস্যার কার্যকর সমাধান।',
     ctaText: 'মাত্র 199 টাকায়!',
-  });
-  
-  const [imageUrl, setImageUrl] = useState<string>('/api/placeholder/400/320');
-  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
-  const [isSaved, setIsSaved] = useState<boolean>(false);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setContent(prev => ({
+  })
+
+  const [imageUrl, setImageUrl] = useState<string>('/api/placeholder/400/320')
+  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false)
+  const [isSaved, setIsSaved] = useState<boolean>(false)
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target
+    setContent((prev) => ({
       ...prev,
-      [name]: value
-    }));
-    setIsSaved(false);
-  };
-  
+      [name]: value,
+    }))
+    setIsSaved(false)
+  }
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = (e) => {
         if (e.target && e.target.result) {
-          setImageUrl(e.target.result as string);
+          setImageUrl(e.target.result as string)
         }
-      };
-      reader.readAsDataURL(e.target.files[0]);
+      }
+      reader.readAsDataURL(e.target.files[0])
     }
-    setIsSaved(false);
-  };
-  
+    setIsSaved(false)
+  }
+
   const handleSave = () => {
     // Here you would typically send this data to your backend
-    console.log('Saving content:', content);
-    console.log('Image URL:', imageUrl);
-    
+    console.log('Saving content:', content)
+    console.log('Image URL:', imageUrl)
+
     // Show success message
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
-  };
-  
+    setIsSaved(true)
+    setTimeout(() => setIsSaved(false), 3000)
+  }
+
   const fadeIn = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3 } }
-  };
-  
+    visible: { opacity: 1, transition: { duration: 0.3 } },
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-gray-900">ল্যান্ডিং পেজ ড্যাশবোর্ড</h1>
+          <h1 className="text-2xl font-bold text-gray-900">
+            ল্যান্ডিং পেজ ড্যাশবোর্ড
+          </h1>
         </div>
       </header>
-      
+
       <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div className="bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
-                <h2 className="text-lg font-medium text-gray-900 mb-4">পাঠ্য সামগ্রী পরিবর্তন করুন</h2>
-                
+                <h2 className="text-lg font-medium text-gray-900 mb-4">
+                  পাঠ্য সামগ্রী পরিবর্তন করুন
+                </h2>
+
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">শিরোনাম</label>
+                    <label
+                      htmlFor="title"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      শিরোনাম
+                    </label>
                     <input
                       type="text"
                       name="title"
@@ -99,9 +111,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="subtitle" className="block text-sm font-medium text-gray-700">উপশিরোনাম</label>
+                    <label
+                      htmlFor="subtitle"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      উপশিরোনাম
+                    </label>
                     <input
                       type="text"
                       name="subtitle"
@@ -111,9 +128,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="price" className="block text-sm font-medium text-gray-700">মূল্য</label>
+                    <label
+                      htmlFor="price"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      মূল্য
+                    </label>
                     <input
                       type="text"
                       name="price"
@@ -123,9 +145,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="buttonText" className="block text-sm font-medium text-gray-700">বাটন টেক্সট</label>
+                    <label
+                      htmlFor="buttonText"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      বাটন টেক্সট
+                    </label>
                     <input
                       type="text"
                       name="buttonText"
@@ -135,9 +162,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="timerText" className="block text-sm font-medium text-gray-700">টাইমার টেক্সট</label>
+                    <label
+                      htmlFor="timerText"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      টাইমার টেক্সট
+                    </label>
                     <input
                       type="text"
                       name="timerText"
@@ -147,9 +179,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="offerText" className="block text-sm font-medium text-gray-700">অফার সংক্রান্ত টেক্সট</label>
+                    <label
+                      htmlFor="offerText"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      অফার সংক্রান্ত টেক্সট
+                    </label>
                     <input
                       type="text"
                       name="offerText"
@@ -159,9 +196,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="ctaText" className="block text-sm font-medium text-gray-700">CTA টেক্সট</label>
+                    <label
+                      htmlFor="ctaText"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      CTA টেক্সট
+                    </label>
                     <input
                       type="text"
                       name="ctaText"
@@ -173,13 +215,20 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div>
-                <h2 className="text-lg font-medium text-gray-900 mb-4">পণ্য এবং রিভিউ সামগ্রী</h2>
-                
+                <h2 className="text-lg font-medium text-gray-900 mb-4">
+                  পণ্য এবং রিভিউ সামগ্রী
+                </h2>
+
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="productDetails" className="block text-sm font-medium text-gray-700">পণ্য বিবরণ</label>
+                    <label
+                      htmlFor="productDetails"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      পণ্য বিবরণ
+                    </label>
                     <textarea
                       name="productDetails"
                       id="productDetails"
@@ -189,9 +238,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="reviewTitle" className="block text-sm font-medium text-gray-700">রিভিউ শিরোনাম</label>
+                    <label
+                      htmlFor="reviewTitle"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      রিভিউ শিরোনাম
+                    </label>
                     <input
                       type="text"
                       name="reviewTitle"
@@ -201,9 +255,14 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="reviewText" className="block text-sm font-medium text-gray-700">রিভিউ টেক্সট</label>
+                    <label
+                      htmlFor="reviewText"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      রিভিউ টেক্সট
+                    </label>
                     <textarea
                       name="reviewText"
                       id="reviewText"
@@ -213,14 +272,25 @@ const Dashboard: React.FC = () => {
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
-                  
+
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">কভার ইমেজ</label>
+                    <label className="block text-sm font-medium text-gray-700">
+                      কভার ইমেজ
+                    </label>
                     <div className="mt-1 flex items-center">
                       <div className="h-32 w-32 overflow-hidden rounded border border-gray-300">
-                        <img src={imageUrl} alt="Cover Preview" className="h-full w-full object-cover" />
+                        <Image
+                          height={128}
+                          width={128}
+                          src={imageUrl}
+                          alt="Cover Preview"
+                          className="h-full w-full object-cover"
+                        />
                       </div>
-                      <label htmlFor="cover-upload" className="ml-5 cursor-pointer bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                      <label
+                        htmlFor="cover-upload"
+                        className="ml-5 cursor-pointer bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+                      >
                         <span>ইমেজ আপলোড করুন</span>
                         <input
                           id="cover-upload"
@@ -236,7 +306,7 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-8 flex justify-end">
               <button
                 type="button"
@@ -255,7 +325,7 @@ const Dashboard: React.FC = () => {
                 সংরক্ষণ করুন
               </motion.button>
             </div>
-            
+
             {isSaved && (
               <motion.div
                 className="mt-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"
@@ -268,9 +338,9 @@ const Dashboard: React.FC = () => {
             )}
           </div>
         </div>
-        
+
         {isPreviewOpen && (
-          <motion.div 
+          <motion.div
             className="mt-8 border rounded-lg overflow-hidden shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -306,17 +376,19 @@ const Dashboard: React.FC = () => {
                   </button>
                 </div>
               </div>
-              
+
               <div className="mt-4 bg-gray-50 p-4 rounded-lg">
-                <h3 className="font-bold text-gray-800 mb-2">{content.reviewTitle}</h3>
-                <p className="text-gray-600 italic">"{content.reviewText}"</p>
+                <h3 className="font-bold text-gray-800 mb-2">
+                  {content.reviewTitle}
+                </h3>
+                <p className="text-gray-600 italic">{content.reviewText}</p>
               </div>
             </div>
           </motion.div>
         )}
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
