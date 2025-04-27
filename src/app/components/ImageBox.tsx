@@ -11,7 +11,7 @@ import Image from 'next/image'
 const ImageBox = () => {
   return (
     <main className="py-12">
-      <div className="h-[280px] w-full max-w-3xl relative mx-auto mb-2">
+      <div className="h-[280px] w-full max-w-3xl relative mx-auto mb-2 overflow-hidden rounded-lg">
         <Image
           src="https://i.ibb.co.com/PGXYXwTq/img.jpg"
           alt="Nagad logo"

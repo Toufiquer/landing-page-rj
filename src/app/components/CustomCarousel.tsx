@@ -31,11 +31,11 @@ export function CustomCarousel() {
       opts={{
         align: 'start',
       }}
-      className="w-full max-w-sm"
+      className="w-full max-w-3xl"
     >
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+        {Array.from({ length: 15 }).map((_, index) => (
+          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">
             <div className="p-1">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">

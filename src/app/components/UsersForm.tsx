@@ -1,44 +1,19 @@
-/*
-|-----------------------------------------
-| setting up SummitForm for the App
-| @author: Toufiquer Rahman<toufiquer.0@gmail.com>
-| @copyright: newinatall, April, 2025
-|-----------------------------------------
-*/
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useForm, SubmitHandler } from 'react-hook-form'
-
-// Define type for form inputs
-type FormInputs = {
-  fullName: string
-  mobileNumber: string
-  email: string
-  paymentMethod: 'bkash' | 'nagad'
-}
+import CartBox from './CartBox'
+import { usePaymentForm } from './usePaymentForm'
 
 const UsersForm: React.FC = () => {
-  // React Hook Form setup
+  // Use our custom hook
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>()
-
-  // State for selected payment method
-  const [paymentMethod, setPaymentMethod] = useState<'bkash' | 'nagad'>('bkash')
-
-  // Handle form submission
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    // Include payment method in submission data
-    const submissionData = {
-      ...data,
-      paymentMethod,
-    }
-    console.log(submissionData)
-    // Add your API call or further processing here
-  }
+    errors,
+    onSubmit,
+    paymentMethod,
+    handlePaymentMethodChange,
+  } = usePaymentForm()
 
   // Animation variants
   const containerVariants = {
@@ -81,16 +56,16 @@ const UsersForm: React.FC = () => {
 
   return (
     <motion.div
-      className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden p-6 md:p-8"
+      id="payment-form"
+      className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden p-6 md:p-8 border-1 border-slate-200"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       <motion.div variants={itemVariants} className="mb-6 text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Complete Your Order
+          অর্ডার করতে আপনার কিছু তথ্য লাগবে
         </h2>
-        <p className="text-gray-600">Digital Product Cart</p>
       </motion.div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -170,6 +145,9 @@ const UsersForm: React.FC = () => {
         </motion.div>
 
         <motion.div variants={itemVariants} className="mb-6">
+          <CartBox />
+        </motion.div>
+        <motion.div variants={itemVariants} className="mb-6">
           <p className="block text-sm font-medium text-gray-700 mb-3">
             Payment Method
           </p>
@@ -177,7 +155,7 @@ const UsersForm: React.FC = () => {
             <motion.div
               className={`relative flex-1 min-w-[140px] p-4 border-2 rounded-lg cursor-pointer flex items-center justify-center ${paymentMethod === 'bkash' ? 'border-pink-500 bg-pink-50' : 'border-gray-200'}`}
               whileHover={{ scale: 1.03 }}
-              onClick={() => setPaymentMethod('bkash')}
+              onClick={() => handlePaymentMethodChange('bkash')}
             >
               <div className="text-center">
                 <div className="h-8 w-16 relative mx-auto mb-2">
@@ -211,7 +189,7 @@ const UsersForm: React.FC = () => {
             <motion.div
               className={`relative flex-1 min-w-[140px] p-4 border-2 rounded-lg cursor-pointer flex items-center justify-center ${paymentMethod === 'nagad' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'}`}
               whileHover={{ scale: 1.03 }}
-              onClick={() => setPaymentMethod('nagad')}
+              onClick={() => handlePaymentMethodChange('nagad')}
             >
               <div className="text-center">
                 <div className="h-8 w-16 relative mx-auto mb-2">
@@ -256,12 +234,12 @@ const UsersForm: React.FC = () => {
 
         <motion.button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-medium"
+          className="w-full cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-medium"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
         >
-          Pay Now
+          অর্ডার দিন ১৯৯.০০ টাকায়
         </motion.button>
       </form>
     </motion.div>
