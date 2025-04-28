@@ -1,0 +1,104 @@
+
+here is an example of const data named baseData I want to implement zustand to manage this data. Now create a zustand store to manage this data and write this function which I include below
+
+# example baseData data 
+export type SingleBoxType = {
+  isOpen: boolean
+  title1?: string
+  description1?: string
+  priceText?: string
+}
+export type BoxType = {
+  box1: SingleBoxType
+  box2: SingleBoxType
+  box3: SingleBoxType
+  box4: SingleBoxType
+  box5: SingleBoxType
+  box6: SingleBoxType
+  box7: SingleBoxType
+  box8: SingleBoxType
+  box9: SingleBoxType
+  box10: SingleBoxType
+}
+export const baseData: BoxType = {
+  box1: {
+    isOpen: true,
+    title1: 'Bangla IT E-Book',
+    description1: 'উদ্যোক্তা ও মার্কেটারদের বাস্তব সমস্যার কার্যকর সমাধান',
+  },
+  box2: {
+    isOpen: true,
+    description1: 'সীমিত সময়ের অফার: ই বুক এক্সেস করুন এখনই',
+  },
+  box3: {
+    isOpen: true,
+    title1: 'সূচিপত্র দেখুন',
+  },
+  box4: {
+    isOpen: true,
+    description1: 'সীমিত সময়ের অফার: ই বুক এক্সেস করুন এখনই',
+  },
+  box5: {
+    isOpen: true,
+    description1: 'এক জলকে ফটকের রিভিউ !',
+  },
+  box6: {
+    isOpen: true,
+    description1: 'সীমিত সময়ের অফার: ই বুক এক্সেস করুন এখনই',
+    priceText: 'মাত্র ১৯৯ টাকা ',
+  },
+  box7: {
+    isOpen: true,
+    description1:
+      'ভাইজান! ই - বুক টা কিন্নায় দেকেন এড  এর খরচ আসলেই কম! ওরিয়ান্স ছাড়াও আরো অনেক ধরণের টিপস অক্কা শপ দিচ্চি ',
+  },
+  box8: {
+    isOpen: false,
+  },
+  box9: {
+    isOpen: false,
+  },
+  box10: {
+    isOpen: false,
+  },
+}
+
+#  zustand Hook example
+
+import {useGetDataQuery, useGetDataByIdQuery, useAddDataMutation, useUpdateDataMutation, useDeleteDataMutation, useBulkDeleteDataMutation, useBulkUpdateDataMutation} from "@/zustand/features/data"
+
+<!-- ! 1. Query - get request -->
+<!-- //  with page and limit  -->
+
+const { data: getResponseAllData, isLoading, isError, error } = useGetDataQuery({ page, limit });
+
+<!-- // query all data  -->
+
+const { data: getResponseAllData, isLoading, isError, error } = useGetDataQuery();
+
+<!-- // query with id -->
+
+const { data: getResponseSingleData, refetch,isLoading, isError, error } = useGetDataByIdQuery(selectedData?.\_id, { skip: !selectedData?.\_id });
+
+<!-- ! 2. Mutation - put, post, delete request -->
+
+<!-- // post  -->
+
+const [addData, { isLoading, isError, error, isSuccess }] = useAddDataMutation();
+
+<!-- // put  -->
+
+const [updateData, { isLoading, isError, error, isSuccess }] = useUpdateDataMutation();
+
+<!-- // delete  -->
+
+const [deleteData, { isLoading, isError, error, isSuccess }] = useDeleteDataMutation();
+
+<!-- // bulkDelete -->
+
+const [bulkDeleteData, { isLoading, isError, error, isSuccess }] = useBulkDeleteDataMutation();
+
+<!-- // bulkUpdate -->
+
+const [bulkUpdateData, { isLoading, isError, error, isSuccess }] = useBulkUpdateDataMutation();
+ 
