@@ -7,11 +7,12 @@
 */
 
 import Link from 'next/link'
-import { baseData } from '../file'
 import GreenBox from '../greenBox'
 import WhiteBox from '../WhiteBox'
+import { useGetDataQuery } from '@/zustand/useBoxStore'
 
 const Box2 = () => {
+  const { data: baseData } = useGetDataQuery({ page: 1, limit: 20 })
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
     e.preventDefault()
 

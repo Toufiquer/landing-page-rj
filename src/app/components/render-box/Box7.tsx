@@ -5,10 +5,11 @@
 | @copyright: newinatall, April, 2025
 |-----------------------------------------
 */
-import { baseData } from '../file'
+import { useGetDataQuery } from '@/zustand/useBoxStore' 
 import WhiteBox from '../WhiteBox'
 
 const Box7 = () => {
+  const { data: baseData } = useGetDataQuery({ page: 1, limit: 20 })
   return (
     <div className="py-4 max-w-3xl">
       <WhiteBox>

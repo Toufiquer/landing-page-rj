@@ -6,11 +6,12 @@
 |-----------------------------------------
 */
 
+import { useGetDataQuery } from '@/zustand/useBoxStore'
 import { CustomCarousel } from '../CustomCarousel'
-import { baseData } from '../file'
 import WhiteBox from '../WhiteBox'
 
 const Box3 = () => {
+  const { data: baseData } = useGetDataQuery({ page: 1, limit: 20 })
   return (
     <div className="py-4">
       {baseData.box3.title1 && (

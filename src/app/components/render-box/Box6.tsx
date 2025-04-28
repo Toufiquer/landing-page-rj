@@ -1,9 +1,3 @@
-import { Button } from '@/components/ui/button'
-import { baseData } from '../file'
-import GreenBox from '../greenBox'
-import WhiteBox from '../WhiteBox'
-import Link from 'next/link'
-
 /*
 |-----------------------------------------
 | setting up Box6 for the App
@@ -11,7 +5,14 @@ import Link from 'next/link'
 | @copyright: newinatall, April, 2025
 |-----------------------------------------
 */
+import { Button } from '@/components/ui/button' 
+import GreenBox from '../greenBox'
+import WhiteBox from '../WhiteBox'
+import Link from 'next/link'
+import { useGetDataQuery } from '@/zustand/useBoxStore'
+
 const Box6 = () => {
+  const { data: baseData } = useGetDataQuery({ page: 1, limit: 20 })
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
     e.preventDefault()
 
